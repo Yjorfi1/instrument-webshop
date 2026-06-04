@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import './App.css'
-import { products } from './data/productData';
-import Navbar from './components/navbar';
+import '../App.css';
+import { products } from '../data/productData';
 
 
-const App = () => {
+const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -14,11 +13,12 @@ const App = () => {
       : product.category.includes(selectedCategory);
     const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
+
+    
   });
 
   return (
    <>
-   <Navbar />
    <div className="filter-section">
      <input
        type="text"
@@ -41,10 +41,9 @@ const App = () => {
     {filteredProducts.length > 0 ? (
       filteredProducts.map((product) => (
         <div key={product.id}>
-          <h3>{product.title}</h3>
-          <p>Price: €{product.price}</p>
-          <img src={product.image} alt={product.title} />
-          <p>Category: {product.category}</p>
+      <img src={product.image} alt={product.title} />
+          <h2>{product.title}</h2>
+          <p>€{product.price}</p>
         </div>
       ))
     ) : (
@@ -57,4 +56,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Home
