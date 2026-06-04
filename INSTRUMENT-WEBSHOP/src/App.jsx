@@ -1,13 +1,33 @@
 import { useState } from 'react'
 import './App.css'
 import { products } from './data/productData';
+import Navbar from './components/navbar';
 
 
 const App = () => {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const filteredProducts = selectedCategory === 'all' 
+    ? products 
+    : products.filter(product => product.category.includes(selectedCategory));
+
   return (
    <>
+   <Navbar />
+   <div className="filter-section">
+     <select 
+       id="category-filter"
+       value={selectedCategory}
+       onChange={(e) => setSelectedCategory(e.target.value)}
+     >
+       <option value="all">Categories</option>
+       <option value="wind-instrument">Wind</option>
+       <option value="percussion-instrument">Percussion</option>
+       <option value="string-instrument">String</option>
+     </select>
+   </div>
    <section className="container">
-    {products.map((product) => (
+    {filteredProducts.map((product) => (
       <div key={product.id}>
         <h3>{product.title}</h3>
         <p>Price: €{product.price}</p>
@@ -21,4 +41,3 @@ const App = () => {
 }
 
 export default App
-
