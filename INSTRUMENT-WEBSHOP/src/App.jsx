@@ -21,9 +21,9 @@ const App = () => {
        onChange={(e) => setSelectedCategory(e.target.value)}
      >
        <option value="all">Categories</option>
-       <option value="wind-instrument">Wind</option>
-       <option value="percussion-instrument">Percussion</option>
-       <option value="string-instrument">String</option>
+       <option value="wind-instrument">Wind instrument</option>
+       <option value="percussion-instrument">Percussion instrument</option>
+       <option value="string-instrument">String instrument</option>
      </select>
    </div>
    <section className="container">
