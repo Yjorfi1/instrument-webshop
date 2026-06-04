@@ -10,7 +10,7 @@ const App = () => {
     {products.map((product) => (
       <div key={product.id}>
         <h3>{product.title}</h3>
-        <p>Price: ${product.price}</p>
+        <p>Price: €{product.price}</p>
         <img src={product.image} alt={product.title} />
         <p>Category: {product.category}</p>
       </div>
