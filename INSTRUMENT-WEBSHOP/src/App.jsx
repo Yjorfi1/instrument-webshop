@@ -38,14 +38,20 @@ const App = () => {
      </select>
    </div>
    <section className="container">
-    {filteredProducts.map((product) => (
-      <div key={product.id}>
-        <h3>{product.title}</h3>
-        <p>Price: €{product.price}</p>
-        <img src={product.image} alt={product.title} />
-        <p>Category: {product.category}</p>
+    {filteredProducts.length > 0 ? (
+      filteredProducts.map((product) => (
+        <div key={product.id}>
+          <h3>{product.title}</h3>
+          <p>Price: €{product.price}</p>
+          <img src={product.image} alt={product.title} />
+          <p>Category: {product.category}</p>
+        </div>
+      ))
+    ) : (
+      <div>
+        <h2>No products found</h2>
       </div>
-    ))}
+    )}
    </section>
    </>
   )
