@@ -30,6 +30,15 @@ const Cart = () => {
     setTotal(getCartTotal());
   }, []);
 
+  const handleRemove = (productId) => {
+    removeFromCart(productId);
+    const updatedCart = getCart();
+    setCart(updatedCart);
+    setTotal(getCartTotal());
+  };
+
+  
+
   const handleCheckout = () => {
     setShowCheckoutModal(true);
     setPaymentMethod(null);
@@ -49,6 +58,9 @@ const Cart = () => {
       setIsProcessing(false);
       setCheckoutSuccess(true);
       setTimeout(() => {
+        clearCart();
+        setCart([]);
+        setTotal(0);
         setCheckoutSuccess(false);
         setShowCheckoutModal(false);
         setPaymentMethod(null);
@@ -58,6 +70,7 @@ const Cart = () => {
           expiryDate: '',
           cvv: ''
         });
+        navigate('/');
       }, 3000);
     }, 2000);
   };
@@ -73,6 +86,9 @@ const Cart = () => {
       setIsProcessing(false);
       setCheckoutSuccess(true);
       setTimeout(() => {
+        clearCart();
+        setCart([]);
+        setTotal(0);
         setCheckoutSuccess(false);
         setShowCheckoutModal(false);
         setPaymentMethod(null);
@@ -82,28 +98,26 @@ const Cart = () => {
           expiryDate: '',
           cvv: ''
         });
+        navigate('/');
       }, 3000);
     }, 2000);
   };
 
   return (
     <div>
-      <button onClick={() => navigate('/')}>← Back to Shop</button>
-      <h1>Shopping Cart</h1>
+      <nav className="navbar">
+      <h1>Instrumentos+ Deluxe Premium V.I.P</h1>
+    </nav>
+      <h1 className="cart-title">Shopping Cart</h1>
 
-      {checkoutSuccess && (
-        <div className="checkout-success">
-          <h2>Payment Successful 🎉</h2>
-        </div>
-      )}
+      
 
       {showCheckoutModal && (
         <div className="checkout-modal-overlay">
           <div className="checkout-modal">
             {checkoutSuccess ? (
               <div className="payment-success">
-                <h2>✓ Payment Processed!</h2>
-                <p>Thank you for your purchase.</p>
+                <h2> Payment Processed!</h2>
               </div>
             ) : isProcessing ? (
              <></>
@@ -148,8 +162,7 @@ const Cart = () => {
                     <option>ING</option>
                     <option>ABN AMRO</option>
                     <option>Rabobank</option>
-                    <option>SNS Bank</option>
-                    <option>Triodos Bank</option>
+                    <option>Other</option>
                   </select>
                 </div>
                 <div className="order-total">
@@ -248,6 +261,7 @@ const Cart = () => {
           <button onClick={() => navigate('/')}>Continue Shopping</button>
         </div>
       ) : (
+    <>
         <div className="cart-content">
           <div className="cart-items">
             {cart.map((product) => (
@@ -255,19 +269,12 @@ const Cart = () => {
                 <img src={product.image} alt={product.title} />
                 <div className="cart-item-info">
                   <h3>{product.title}</h3>
-                  <p>€{product.price.toFixed(2)}</p>
+                  <p>{product.category}</p>
+                  <p>Mastery Difficulty: {product.difficulty}</p>
                 </div>
-                <div className="quantity-control">
-                  <button onClick={() => handleQuantityChange(product.id, product.quantity - 1)}>
-                    -
-                  </button>
-                  <span>{product.quantity}</span>
-                  <button onClick={() => handleQuantityChange(product.id, product.quantity + 1)}>
-                    +
-                  </button>
-                </div>
+                <div className="item-summaries">
                 <div className="item-total">
-                  <p>€{(product.price * product.quantity).toFixed(2)}</p>
+                  <p>€{(product.price)}</p>
                 </div>
                 <button 
                   className="remove-btn"
@@ -276,16 +283,18 @@ const Cart = () => {
                   Remove
                 </button>
               </div>
+              </div>
             ))}
           </div>
 
           <div className="cart-summary">
+            <h1 className="cart-summary-title">Summary</h1>
             <div className="summary-row">
-              <span>Items:</span>
+              <span>Product amount:</span>
               <span>{cart.reduce((sum, item) => sum + item.quantity, 0)}</span>
             </div>
             <div className="summary-row total">
-              <span>Total:</span>
+              <span>Total price:</span>
               <span>€{total.toFixed(2)}</span>
             </div>
 
@@ -304,6 +313,7 @@ const Cart = () => {
             </button>
           </div>
         </div>
+        </>
       )}
     </div>
   );

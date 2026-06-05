@@ -11,7 +11,6 @@ import Cart from './pages/Cart';
 const App = () => {
   return (
    <>
-    <Navbar />
     <BrowserRouter basename="/">
       <Routes>
           <Route index element={<Home />} />

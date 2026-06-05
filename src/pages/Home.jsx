@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import '../App.css';
 import { products } from '../data/productData';
 import { addToCart } from '../utils/cartStorage';
@@ -22,15 +23,22 @@ const Home = () => {
 
   return (
    <>
+   <nav className="navbar">
+      <h1>Instrumentos+ Deluxe Premium V.I.P</h1>
+    </nav>
    <div className="filter-section">
      <input
        type="text"
-       placeholder="Search..."
+      className="category-search"
+       placeholder="Search"
        value={searchTerm}
        onChange={(e) => setSearchTerm(e.target.value)}
      />
+    <img className="cart-button" src="/img/cart-route.png" alt="🛒" onClick={() => navigate('/cart')} />
+
      <select 
        id="category-filter"
+       className="category-filter"
        value={selectedCategory}
        onChange={(e) => setSelectedCategory(e.target.value)}
      >
@@ -39,16 +47,27 @@ const Home = () => {
        <option value="percussion-instrument">Percussion</option>
        <option value="string-instrument">String</option>
      </select>
-     <button onClick={() => navigate('/cart')}>Cart</button>
    </div>
    <section className="container">
     {filteredProducts.length > 0 ? (
       filteredProducts.map((product) => (
-        <div key={product.id}>
-      <img src={product.image} alt={product.title} />
-          <h2>{product.title}</h2>
-          <p>€{product.price}</p>
-          <button onClick={() => addToCart(product)}>Add to Cart</button>
+        <div className="product" key={product.id}>
+      <img  className="product-image" src={product.image} alt={product.title} />
+          <h2 className="product-title">{product.title}</h2>
+          <div className="product2"> 
+                      <p className="product-price">€{product.price}</p>
+          <img className="product-button" src="/img/cart.png" alt="🛒" onClick={() => {
+            addToCart(product);
+            toast.success(`${product.title} added to cart!`, {
+              position: 'bottom-right',
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          }} />
+</div>
         </div>
       ))
     ) : (
