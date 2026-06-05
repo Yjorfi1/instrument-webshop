@@ -1,9 +1,12 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import { products } from '../data/productData';
+import { addToCart } from '../utils/cartStorage';
 
 
 const Home = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -36,6 +39,7 @@ const Home = () => {
        <option value="percussion-instrument">Percussion</option>
        <option value="string-instrument">String</option>
      </select>
+     <button onClick={() => navigate('/cart')}>Cart</button>
    </div>
    <section className="container">
     {filteredProducts.length > 0 ? (
@@ -44,6 +48,7 @@ const Home = () => {
       <img src={product.image} alt={product.title} />
           <h2>{product.title}</h2>
           <p>€{product.price}</p>
+          <button onClick={() => addToCart(product)}>Add to Cart</button>
         </div>
       ))
     ) : (

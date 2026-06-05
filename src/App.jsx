@@ -4,7 +4,7 @@ import { products } from './data/productData';
 import Navbar from './components/navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-// import Cart from './pages/Cart';
+import Cart from './pages/Cart';
 
 
 
@@ -15,7 +15,7 @@ const App = () => {
     <BrowserRouter basename="/">
       <Routes>
           <Route index element={<Home />} />
-          {/* <Route path="Cart" element={<Cart />} /> */}
+          <Route path="cart" element={<Cart />} />
         </Routes>
     </BrowserRouter>
    </>
