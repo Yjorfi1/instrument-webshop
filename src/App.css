@@ -1,19 +1,22 @@
-
- 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+ 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+ 
 body {
   background-color: #E0B3B3;
   color: #333;
         font-family: 'Kreon';
         font-weight: 08;
-
+ 
 }
-
+ 
 .navbar {
   background-color: #773636;
   padding: 0.6rem;
@@ -21,33 +24,36 @@ body {
       font-family: 'Pacifico';
       font-weight: bold;
       text-align: center;
+  width: 100%;
+  box-sizing: border-box;
 }
-
+ 
 .navbar h1 {
   font-size: 2.5rem;
   font-weight: 200;
 }
-
+ 
 .filter-section {
     color: black;
   display: flex;
-  gap: 35rem  ;
+  gap: 10rem  ;
   padding: 1.5rem 2rem 0rem 2rem;
   background-color: #E0B3B3;
   flex-wrap: wrap;
-
+  justify-content: center;
+ 
 }
 .cart-summary-title{
   text-align: center;
   font-family: 'Pacifico';
 }
-
+ 
 .category-filter{
     width: 200px;
 }
 .category-search{
         width: 200px;
-
+ 
 }
 .filter-section input,
 .filter-section select {
@@ -58,9 +64,9 @@ body {
     background-color: #F5DDDD;
     border: 1px solid #F5DDDD;
     border-radius: 40px;
-
+ 
 }
-
+ 
 .filter-section button {
   padding: 0.6rem 1.5rem;
   background-color: #983D3D;
@@ -71,11 +77,11 @@ body {
   font-weight: 500;
   transition: background-color 0.3s;
 }
-
+ 
 .filter-section button:hover {
   background-color: #2980b9;
 }
-
+ 
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -84,7 +90,7 @@ body {
   max-width: 2500px;
   margin: 0 auto;
 }
-
+ 
 .container > div {
   background-color: #B17979;
   border-radius: 20px;
@@ -93,16 +99,16 @@ body {
   transition: transform 0.3s, box-shadow 0.3s;
   height: 300px;
 }
-
+ 
 .container > div:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-
+ 
 .cart-title{
     color: white;
     font-weight: 700;
-    
+   
 }
 .product-image {
   width: 100%;
@@ -116,13 +122,13 @@ body {
   height: 40px;
   border-radius: 12px;
 }
-
+ 
 .container h2 {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
     color: white;
 }
-
+ 
 .container p {
     color: white;
   font-size: 1.3rem;
@@ -141,12 +147,12 @@ body {
 .product-button:hover{  
   cursor: pointer;
 }
-
+ 
 .empty-cart {
   text-align: center;
   padding: 4rem 2rem;
 }
-
+ 
 .empty-cart button {
   padding: 0.7rem 2rem;
   background-color: #983D3D;
@@ -158,37 +164,41 @@ body {
   margin-top: 1rem;
   transition: background-color 0.3s;
 }
-
-
-
+ 
+ 
+ 
 .cart-content {
     font-weight: 0;
   display: grid;
   grid-template-columns: 1fr 350px;
-  gap: 2rem 6.5rem;
+  gap: 2rem;
   max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
-
+ 
 .cart-items {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
-
+ 
 .cart-item {
   display: grid;
     background-color: #B17979;
   border-radius: 30px;
-
+ 
   grid-template-columns: 100px 1fr auto auto auto;;
   align-items: center;
-  gap: 10rem 19rem 10rem 10rem;
+  gap: 1rem 2rem;
   padding: 1.5rem;
+  overflow-x: hidden;
 }
-
+ 
 .cart-item img {
   width: 150px;
   height: 150px;
@@ -203,13 +213,13 @@ margin-bottom: 5rem;
     color: white;
   font-size: 2rem;
   margin-bottom: 0.5rem;
-
+ 
 }
 .item-total{
     color: white;
     font-size: 2rem;
 }
-
+ 
 .cart-item-info p {
   color: white;
   font-weight: 600;
@@ -219,7 +229,7 @@ margin-bottom: 5rem;
     flex-direction: column;
     gap: 2rem;
 }
-
+ 
 .remove-btn {
   padding: .5rem 3rem;
   background-color: #983D3D;
@@ -233,11 +243,11 @@ margin-bottom: 5rem;
 .remove-btn button{
 opacity: 0.6;
 }
-
+ 
 .remove-btn:hover {
   background-color: #c0392b;
 }
-
+ 
 .cart-summary {
   background-color: #B17979;
   border-radius: 8px;
@@ -246,21 +256,21 @@ opacity: 0.6;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   color: white;
 }
-
+ 
 .summary-row {
   display: flex;
   justify-content: space-between;
   padding: 0.8rem 0;
   border-bottom: 1px solid #eee;
 }
-
+ 
 .summary-row.total {
   font-size: 1.3rem;
   font-weight: 600;
   border-bottom: 2px solid #983D3D;
   margin-bottom: 1rem;
 }
-
+ 
 .checkout-btn,
 .continue-shopping-btn {
   width: 100%;
@@ -272,17 +282,17 @@ opacity: 0.6;
   font-weight: 600;
   transition: background-color 0.3s;
 }
-
+ 
 .checkout-btn {
   background-color: #983D3D;
   color: white;
 }
-
+ 
 .continue-shopping-btn {
   background-color: #983D3D;
   color: white;
 }
-
+ 
 .checkout-modal-overlay {
   position: fixed;
   top: 0;
@@ -295,7 +305,7 @@ opacity: 0.6;
   align-items: center;
   z-index: 1000;
 }
-
+ 
 .checkout-modal {
     color: white;
   background-color: #B17979;
@@ -303,15 +313,15 @@ opacity: 0.6;
   padding: 2rem;
   max-width: 500px;
   width: 90%;
-  
+ 
 }
-
+ 
 .payment-selection,
 .idea-payment,
 .card-payment {
   text-align: center;
 }
-
+ 
 .payment-selection h2,
 .idea-payment h2,
 .card-payment h2 {
@@ -319,14 +329,14 @@ opacity: 0.6;
   color: #ffffff;
   font-family: 'Kreon';
 }
-
+ 
 .payment-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
-
+ 
 .payment-option-btn {
   padding: 1.5rem;
   border: 2px solid #983D3D;
@@ -337,29 +347,29 @@ opacity: 0.6;
   color: white;
     font-family: 'Kreon';
 }
-
+ 
 .payment-option-btn:hover {
   border-color: #983D3D;
   background-color: #ecf7ff;
 }
-
+ 
 .option-icon {
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
-
+ 
 .option-text h3 {
   font-size: 1rem;
     font-family: 'Kreon';
     font-weight: 200;
-
+ 
 }
-
+ 
 .bank-selection {
   margin: 1.5rem 0;
   text-align: left;
 }
-
+ 
 .bank-selection select {
   width: 100%;
   padding: 0.7rem;
@@ -367,29 +377,29 @@ opacity: 0.6;
   border: 1px solid #F5DDDD;
   border-radius: 30px;
   margin-top: 0.5rem;
-
+ 
 }
-
+ 
 .order-total {
   background-color: #983D3D;
       font-family: 'Kreon';
-
+ 
   padding: 1rem;
   border-radius: 4px;
   margin: 1.5rem 0;
 }
-
+ 
 .form-group {
   margin-bottom: 1rem;
   text-align: left;
 }
-
+ 
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
-
+ 
 .form-group input {
   width: 100%;
     background-color: #F5DDDD;
@@ -399,13 +409,13 @@ color: black;
   border-radius: 4px;
   font-size: 1rem;
 }
-
+ 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
-
+ 
 .confirm-payment-btn,
 .cancel-btn,
 .back-btn {
@@ -417,32 +427,31 @@ color: black;
   transition: background-color 0.3s;
   margin-top: 1rem;
 }
-
+ 
 .confirm-payment-btn {
   background-color: #983D3D;
   color: white;
   width: 100%;
 }
-
-
-
+ 
+ 
+ 
 .cancel-btn,
 .back-btn {
   background-color: #983D3D;
   color: white;
   margin-right: 0.5rem;
 }
-
-
-
+ 
+ 
+ 
 .payment-success {
   text-align: center;
   padding: 2rem;
 }
-
+ 
 .payment-success h2 {
   color: white;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
-

@@ -1,107 +1,108 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { 
   getCart, 
   removeFromCart, 
   clearCart, 
   getCartTotal,
   updateQuantity 
-} from '../utils/cartStorage';
-import '../App.css';
+} from '../utils/cartStorage'
+import '../App.css'
 
 const Cart = () => {
-  const navigate = useNavigate();
-  const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
-  const [checkoutSuccess, setCheckoutSuccess] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState(null);
-  const [cardData, setCardData] = useState({
+  var navigate = useNavigate()
+  var [cart, setCart] = useState([])
+  var [total, setTotal] = useState(0)
+  var [showCheckoutModal, setShowCheckoutModal] = useState(false)
+  var [checkoutSuccess, setCheckoutSuccess] = useState(false)
+  var [paymentMethod, setPaymentMethod] = useState(null)
+  var [cardData, setCardData] = useState({
     cardNumber: '',
     cardHolder: '',
     expiryDate: '',
     cvv: ''
-  });
-  const [isProcessing, setIsProcessing] = useState(false);
+  })
+  var [isProcessing, setIsProcessing] = useState(false)
 
   useEffect(() => {
-    const currentCart = getCart();
-    setCart(currentCart);
-    setTotal(getCartTotal());
-  }, []);
+    var currentCart = getCart()
+    setCart(currentCart)
 
-  const handleRemove = (productId) => {
-    removeFromCart(productId);
-    const updatedCart = getCart();
-    setCart(updatedCart);
-    setTotal(getCartTotal());
-  };
+    setTotal(getCartTotal())
+  }, [])
+
+  var handleRemove = (productId) => {
+    removeFromCart(productId)
+
+    var updatedCart = getCart()
+    setCart(updatedCart)
+    setTotal(getCartTotal())
+  }
 
   
+  var handleCheckout = () => {
+    setShowCheckoutModal(true)
+    setPaymentMethod(null)
+  }
 
-  const handleCheckout = () => {
-    setShowCheckoutModal(true);
-    setPaymentMethod(null);
-  };
-
-  const handleCardChange = (e) => {
-    const { name, value } = e.target;
+  var handleCardChange = (e) => {
+    var { name, value } = e.target
     setCardData(prev => ({
       ...prev,
       [name]: value
-    }));
-  };
+    }))
+  }
 
-  const handleIDEALPayment = () => {
-    setIsProcessing(true);
+  var handleIDEALPayment = () => { //just for testing 
+    setIsProcessing(true)
     setTimeout(() => {
-      setIsProcessing(false);
-      setCheckoutSuccess(true);
+      setIsProcessing(false)
+      setCheckoutSuccess(true)
       setTimeout(() => {
-        clearCart();
-        setCart([]);
-        setTotal(0);
-        setCheckoutSuccess(false);
-        setShowCheckoutModal(false);
-        setPaymentMethod(null);
+        clearCart()
+        setCart([])
+        setTotal(0)
+        setCheckoutSuccess(false)
+        setShowCheckoutModal(false)
+        setPaymentMethod(null)
         setCardData({
           cardNumber: '',
           cardHolder: '',
           expiryDate: '',
           cvv: ''
-        });
-        navigate('/');
-      }, 3000);
-    }, 2000);
-  };
+        })
+        navigate('/')
+      }, 3000)
+    }, 2000)
+  }
 
-  const handleCreditCardSubmit = (e) => {
-    e.preventDefault();
+  var handleCreditCardSubmit = (e) => {
+    e.preventDefault()
     if (!cardData.cardNumber || !cardData.cardHolder || !cardData.expiryDate || !cardData.cvv) {
-      alert('Not enough card details filled in');
-      return;
+      alert('Not enough card details filled in')
+      return
     }
-    setIsProcessing(true);
+    setIsProcessing(true)
     setTimeout(() => {
-      setIsProcessing(false);
-      setCheckoutSuccess(true);
+      setIsProcessing(false)
+      setCheckoutSuccess(true)
       setTimeout(() => {
-        clearCart();
-        setCart([]);
-        setTotal(0);
-        setCheckoutSuccess(false);
-        setShowCheckoutModal(false);
-        setPaymentMethod(null);
+        clearCart()
+        setCart([])
+        setTotal(0)
+        setCheckoutSuccess(false)
+        setShowCheckoutModal(false)
+        setPaymentMethod(null)
         setCardData({
           cardNumber: '',
           cardHolder: '',
           expiryDate: '',
           cvv: ''
-        });
-        navigate('/');
-      }, 3000);
-    }, 2000);
-  };
+        })
+        navigate('/')
+      }, 3000)
+    }, 2000)
+  }
 
   return (
     <div>
@@ -109,8 +110,6 @@ const Cart = () => {
       <h1>Instrumentos+ Deluxe Premium V.I.P</h1>
     </nav>
       <h1 className="cart-title">Shopping Cart</h1>
-
-      
 
       {showCheckoutModal && (
         <div className="checkout-modal-overlay">
@@ -125,10 +124,7 @@ const Cart = () => {
               <div className="payment-selection">
                 <h2>Select Payment Method</h2>
                 <div className="payment-options">
-                  <button 
-                    className="payment-option-btn idea-btn"
-                    onClick={() => setPaymentMethod('idea')}
-                  >
+                  <button className="payment-option-btn idea-btn" onClick={() => setPaymentMethod('idea')}>
                     <div className="option-icon">💳</div>
                     <div className="option-text">
                       <h3>iDEAL</h3>
@@ -144,17 +140,13 @@ const Cart = () => {
                     </div>
                   </button>
                 </div>
-                <button 
-                  className="cancel-btn"
-                  onClick={() => setShowCheckoutModal(false)}
-                >
+                <button className="cancel-btn" onClick={() => setShowCheckoutModal(false)}>
                   Cancel
                 </button>
               </div>
             ) : paymentMethod === 'idea' ? (
               <div className="idea-payment">
                 <h2>iDEAL Payment</h2>
-                <p>You will be redirected to your bank to complete the payment.</p>
                 <div className="bank-selection">
                   <p>Select your bank:</p>
                   <select>
@@ -166,19 +158,12 @@ const Cart = () => {
                   </select>
                 </div>
                 <div className="order-total">
-                  <p>Amount to pay: <strong>€{total.toFixed(2)}</strong></p>
+                  <p>Amount: <strong>€{total.toFixed(2)}</strong></p>
                 </div>
-                <button 
-                  className="confirm-payment-btn"
-                  onClick={handleIDEALPayment}
-                  disabled={isProcessing}
-                >
+                <button className="confirm-payment-btn" onClick={handleIDEALPayment}disabled={isProcessing}>
                   Continue
                 </button>
-                <button 
-                  className="back-btn"
-                  onClick={() => setPaymentMethod(null)}
-                >
+                <button className="back-btn" onClick={() => setPaymentMethod(null)}>
                   Back
                 </button>
               </div>
@@ -234,18 +219,10 @@ const Cart = () => {
                   <div className="order-total">
                     <p>Total Amount: <strong>€{total.toFixed(2)}</strong></p>
                   </div>
-                  <button 
-                    type="submit"
-                    className="confirm-payment-btn"
-                    disabled={isProcessing}
-                  >
+                  <button type="submit" className="confirm-payment-btn" disabled={isProcessing}>
                     Pay Now
                   </button>
-                  <button 
-                    type="button"
-                    className="back-btn"
-                    onClick={() => setPaymentMethod(null)}
-                  >
+                  <button type="button" className="back-btn" onClick={() => setPaymentMethod(null)}>
                     Back
                   </button>
                 </form>
@@ -273,13 +250,8 @@ const Cart = () => {
                   <p>Mastery Difficulty: {product.difficulty}</p>
                 </div>
                 <div className="item-summaries">
-                <div className="item-total">
-                  <p>€{(product.price)}</p>
-                </div>
-                <button 
-                  className="remove-btn"
-                  onClick={() => handleRemove(product.id)}
-                >
+                <div className="item-total"> <p>€{(product.price)}</p></div>
+                <button className="remove-btn" onClick={() => handleRemove(product.id)}>
                   Remove
                 </button>
               </div>
@@ -298,17 +270,11 @@ const Cart = () => {
               <span>€{total.toFixed(2)}</span>
             </div>
 
-            <button 
-              className="checkout-btn"
-              onClick={handleCheckout}
-            >
+            <button className="checkout-btn" onClick={handleCheckout}>
               Checkout
             </button>
 
-            <button 
-              className="continue-shopping-btn"
-              onClick={() => navigate('/')}
-            >
+            <button className="continue-shopping-btn" onClick={() => navigate('/')}>
               Continue Shopping
             </button>
           </div>
@@ -316,7 +282,7 @@ const Cart = () => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart

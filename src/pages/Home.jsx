@@ -1,24 +1,19 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import '../App.css';
-import { products } from '../data/productData';
-import { addToCart } from '../utils/cartStorage';
-
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import '../App.css'
+import { products } from '../data/productData'
+import { addToCart } from '../utils/cartStorage'
 
 const Home = () => {
-  const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  var navigate = useNavigate()
+  var [selectedCategory, setSelectedCategory] = useState('all')
+  var [searchTerm, setSearchTerm] = useState('')
 
-  const filteredProducts = products.filter(product => {
-    const matchesCategory = selectedCategory === 'all' 
-      ? true 
-      : product.category.includes(selectedCategory);
-    const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-
-    
+  var filteredProducts = products.filter(product => {
+    var matchesCategory = selectedCategory === 'all' ? true : product.category.includes(selectedCategory)
+    var matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    return matchesCategory && matchesSearch
   });
 
   return (
@@ -34,7 +29,7 @@ const Home = () => {
        value={searchTerm}
        onChange={(e) => setSearchTerm(e.target.value)}
      />
-    <img className="cart-button" src="/img/cart-route.png" alt="🛒" onClick={() => navigate('/cart')} />
+    <img className="cart-button" src="/img/cart-route.png" onClick={() => navigate('/cart')} />
 
      <select 
        id="category-filter"
@@ -48,16 +43,17 @@ const Home = () => {
        <option value="string-instrument">String</option>
      </select>
    </div>
+
    <section className="container">
     {filteredProducts.length > 0 ? (
       filteredProducts.map((product) => (
         <div className="product" key={product.id}>
-      <img  className="product-image" src={product.image} alt={product.title} />
+      <img  className="product-image" src={product.image} />
           <h2 className="product-title">{product.title}</h2>
           <div className="product2"> 
-                      <p className="product-price">€{product.price}</p>
-          <img className="product-button" src="/img/cart.png" alt="🛒" onClick={() => {
-            addToCart(product);
+            <p className="product-price">€{product.price}</p>
+          <img className="product-button" src="/img/cart.png" onClick={() => {
+            addToCart(product)
             toast.success(`${product.title} added to cart!`, {
               position: 'bottom-right',
               autoClose: 2000,
@@ -65,19 +61,19 @@ const Home = () => {
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,
-            });
+            })
           }} />
-</div>
-        </div>
-      ))
-    ) : (
-      <div>
-        <h2>No products found</h2>
-      </div>
-    )}
-   </section>
-   </>
-  )
+          </div>
+          </div>
+          ))
+        ):(
+        <div>
+          <h2>No products found</h2>
+          </div>
+        )}
+        </section>
+        </>
+      )
 }
 
 export default Home
