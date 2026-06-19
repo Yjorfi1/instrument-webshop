@@ -36,7 +36,7 @@ body {
 .filter-section {
     color: black;
   display: flex;
-  gap: 10rem  ;
+  gap: 7rem  ;
   padding: 1.5rem 2rem 0rem 2rem;
   background-color: #E0B3B3;
   flex-wrap: wrap;
